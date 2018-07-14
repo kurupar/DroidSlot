@@ -30,6 +30,9 @@ public class DroidSlotActivity extends AppCompatActivity {
         final Button b2 = (Button) this.findViewById(R.id.slotbutton2);
         final Button b3 = (Button) this.findViewById(R.id.slotbutton3);
 
+        final Button retryButton = (Button) this.findViewById(R.id.retrybutton);
+        retryButton.setVisibility(View.INVISIBLE);
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +57,12 @@ public class DroidSlotActivity extends AppCompatActivity {
                 }
                 droidImage1.setImageResource(drowbleId);
                 Toast.makeText(getApplicationContext(), Integer.toString(droidSide1) , Toast.LENGTH_SHORT).show();
+                if(droidSide1 == droidSide2 && droidSide1 == droidSide3) {
+                    Toast.makeText(getApplicationContext(), "おめでとう！揃いました", Toast.LENGTH_SHORT).show();
+                    retryButton.setVisibility(View.INVISIBLE);
+                }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
+                    retryButton.setVisibility(View.INVISIBLE);
+                }
                 b1.setEnabled(false);
             }
         });
@@ -82,6 +91,12 @@ public class DroidSlotActivity extends AppCompatActivity {
                 }
                 droidImage2.setImageResource(drowbleId);
                 Toast.makeText(getApplicationContext(), Integer.toString(droidSide2) , Toast.LENGTH_SHORT).show();
+                if(droidSide1 == droidSide2 && droidSide1 == droidSide3){
+                    Toast.makeText(getApplicationContext(), "おめでとう！揃いました" , Toast.LENGTH_SHORT).show();
+                    retryButton.setVisibility(View.INVISIBLE);
+                }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
+                    retryButton.setVisibility(View.INVISIBLE);
+                }
                 b2.setEnabled(false);
             }
         });
@@ -110,7 +125,29 @@ public class DroidSlotActivity extends AppCompatActivity {
                 }
                 droidImage3.setImageResource(drowbleId);
                 Toast.makeText(getApplicationContext(), Integer.toString(droidSide3) , Toast.LENGTH_SHORT).show();
+                if(droidSide1 == droidSide2 && droidSide1 == droidSide3){
+                    Toast.makeText(getApplicationContext(), "おめでとう！揃いました" , Toast.LENGTH_SHORT).show();
+                    retryButton.setVisibility(View.INVISIBLE);
+                }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
+                    retryButton.setVisibility(View.INVISIBLE);
+                }
                 b3.setEnabled(false);
+            }
+        });
+
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                droidImage1.setImageResource(R.drawable.star);
+                droidImage2.setImageResource(R.drawable.star);
+                droidImage3.setImageResource(R.drawable.star);
+
+                b1.setEnabled(true);
+                b2.setEnabled(true);
+                b3.setEnabled(true);
+
+                retryButton.setVisibility(View.INVISIBLE);
+                droidSide1 = droidSide2 = droidSide3 = -1;
             }
         });
 
