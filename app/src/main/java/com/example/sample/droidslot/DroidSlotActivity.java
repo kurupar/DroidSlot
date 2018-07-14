@@ -14,7 +14,7 @@ public class DroidSlotActivity extends AppCompatActivity {
     int droidSide1 = -1;                     //整数を入れるための変数を宣言
     int droidSide2 = -1;                     //整数を入れるための変数を宣言
     int droidSide3 = -1;                     //整数を入れるための変数を宣言
-
+    Button retryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,39 +30,15 @@ public class DroidSlotActivity extends AppCompatActivity {
         final Button b2 = (Button) this.findViewById(R.id.slotbutton2);
         final Button b3 = (Button) this.findViewById(R.id.slotbutton3);
 
-        final Button retryButton = (Button) this.findViewById(R.id.retrybutton);
+        retryButton = (Button) this.findViewById(R.id.retrybutton);
         retryButton.setVisibility(View.INVISIBLE);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 droidSide1 = r.nextInt(4);   //0以上4未満の整数の乱数を作成する。
-                int drowbleId;  //リソースID用変数
-                switch(droidSide1){
-                    case 0:
-                        //0なら前向き
-                        drowbleId = R.drawable.droid_front;
-                        break;
-                    case 1:
-                        //1なら後ろ向き
-                        drowbleId = R.drawable.droid_back;
-                        break;
-                    case 2:
-                        //２なら左向き
-                        drowbleId = R.drawable.droid_left;
-                        break;
-                    default:
-                        //それ以外は右向き
-                        drowbleId = R.drawable.droid_right;
-                }
-                droidImage1.setImageResource(drowbleId);
-                Toast.makeText(getApplicationContext(), Integer.toString(droidSide1) , Toast.LENGTH_SHORT).show();
-                if(droidSide1 == droidSide2 && droidSide1 == droidSide3) {
-                    Toast.makeText(getApplicationContext(), "おめでとう！揃いました", Toast.LENGTH_SHORT).show();
-                    retryButton.setVisibility(View.INVISIBLE);
-                }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
-                    retryButton.setVisibility(View.INVISIBLE);
-                }
+                droidImage1.setImageResource(getDrowbleId(droidSide1));
+                checkSlot();
                 b1.setEnabled(false);
             }
         });
@@ -71,32 +47,8 @@ public class DroidSlotActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 droidSide2 = r.nextInt(4);   //0以上4未満の整数の乱数を作成する。
-                int drowbleId;  //リソースID用変数
-                switch(droidSide2){
-                    case 0:
-                        //0なら前向き
-                        drowbleId = R.drawable.droid_front;
-                        break;
-                    case 1:
-                        //1なら後ろ向き
-                        drowbleId = R.drawable.droid_back;
-                        break;
-                    case 2:
-                        //２なら左向き
-                        drowbleId = R.drawable.droid_left;
-                        break;
-                    default:
-                        //それ以外は右向き
-                        drowbleId = R.drawable.droid_right;
-                }
-                droidImage2.setImageResource(drowbleId);
-                Toast.makeText(getApplicationContext(), Integer.toString(droidSide2) , Toast.LENGTH_SHORT).show();
-                if(droidSide1 == droidSide2 && droidSide1 == droidSide3){
-                    Toast.makeText(getApplicationContext(), "おめでとう！揃いました" , Toast.LENGTH_SHORT).show();
-                    retryButton.setVisibility(View.INVISIBLE);
-                }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
-                    retryButton.setVisibility(View.INVISIBLE);
-                }
+                droidImage2.setImageResource(getDrowbleId(droidSide2));
+                checkSlot();
                 b2.setEnabled(false);
             }
         });
@@ -105,32 +57,8 @@ public class DroidSlotActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 droidSide3 = r.nextInt(4);   //0以上4未満の整数の乱数を作成する。
-                int drowbleId;  //リソースID用変数
-                switch(droidSide3){
-                    case 0:
-                        //0なら前向き
-                        drowbleId = R.drawable.droid_front;
-                        break;
-                    case 1:
-                        //1なら後ろ向き
-                        drowbleId = R.drawable.droid_back;
-                        break;
-                    case 2:
-                        //２なら左向き
-                        drowbleId = R.drawable.droid_left;
-                        break;
-                    default:
-                        //それ以外は右向き
-                        drowbleId = R.drawable.droid_right;
-                }
-                droidImage3.setImageResource(drowbleId);
-                Toast.makeText(getApplicationContext(), Integer.toString(droidSide3) , Toast.LENGTH_SHORT).show();
-                if(droidSide1 == droidSide2 && droidSide1 == droidSide3){
-                    Toast.makeText(getApplicationContext(), "おめでとう！揃いました" , Toast.LENGTH_SHORT).show();
-                    retryButton.setVisibility(View.INVISIBLE);
-                }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
-                    retryButton.setVisibility(View.INVISIBLE);
-                }
+                droidImage3.setImageResource(getDrowbleId(droidSide3));
+                checkSlot();
                 b3.setEnabled(false);
             }
         });
@@ -152,4 +80,37 @@ public class DroidSlotActivity extends AppCompatActivity {
         });
 
     }
+
+    private int getDrowbleId(int side){
+        int drowbleId;  //リソースID用変数
+        switch(side){
+            case 0:
+                //0なら前向き
+                drowbleId = R.drawable.droid_front;
+                break;
+            case 1:
+                //1なら後ろ向き
+                drowbleId = R.drawable.droid_back;
+                break;
+            case 2:
+                //２なら左向き
+                drowbleId = R.drawable.droid_left;
+                break;
+            default:
+                //それ以外は右向き
+                drowbleId = R.drawable.droid_right;
+        }
+        return drowbleId;
+    }
+
+    private void checkSlot(){
+        if(droidSide1 == droidSide2 && droidSide1 == droidSide3){
+            Toast.makeText(getApplicationContext(), "おめでとう！揃いました" , Toast.LENGTH_SHORT).show();
+            retryButton.setVisibility(View.INVISIBLE);
+        }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
+            retryButton.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
 }
