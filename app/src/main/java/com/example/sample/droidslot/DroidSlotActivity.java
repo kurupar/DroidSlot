@@ -93,9 +93,9 @@ public class DroidSlotActivity extends AppCompatActivity {
     private void checkSlot(){
         if(droidSide1 == droidSide2 && droidSide1 == droidSide3){
             Toast.makeText(getApplicationContext(), "おめでとう！揃いました" , Toast.LENGTH_SHORT).show();
-            retryButton.setVisibility(View.INVISIBLE);
+            retryButton.setVisibility(View.VISIBLE);
         }else if(droidSide1 != 1 && droidSide2 != 1 && droidSide3 != 1 ){
-            retryButton.setVisibility(View.INVISIBLE);
+            retryButton.setVisibility(View.VISIBLE);
         }
 
     }
