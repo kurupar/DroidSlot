@@ -82,25 +82,12 @@ public class DroidSlotActivity extends AppCompatActivity {
     }
 
     private int getDrowbleId(int side){
-        int drowbleId;  //リソースID用変数
-        switch(side){
-            case 0:
-                //0なら前向き
-                drowbleId = R.drawable.droid_front;
-                break;
-            case 1:
-                //1なら後ろ向き
-                drowbleId = R.drawable.droid_back;
-                break;
-            case 2:
-                //２なら左向き
-                drowbleId = R.drawable.droid_left;
-                break;
-            default:
-                //それ以外は右向き
-                drowbleId = R.drawable.droid_right;
-        }
-        return drowbleId;
+        int[] drawbleId = new int[]{    R.drawable.droid_front,
+                                        R.drawable.droid_back,
+                                        R.drawable.droid_left,
+                                        R.drawable.droid_right  };
+
+        return drawbleId[side];
     }
 
     private void checkSlot(){
